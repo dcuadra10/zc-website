@@ -659,7 +659,6 @@
             text-align: right;
         }
     </style>
-    </style>
 </head>
 
 <body>
@@ -1720,10 +1719,8 @@
 
             let totalExpNeeded = 0;
             if (targetLvl > currentLvl) {
-                // Sum levels exp
-                for(let i = currentLvl; i < targetLvl; i++) {
-                    totalExpNeeded += levelExp[i];
-                }
+                // levelExp is cumulative: levelExp[L-1] = total EXP to reach level L
+                totalExpNeeded = levelExp[targetLvl - 1] - levelExp[currentLvl - 1];
             }
 
             let totalStarsNeeded = 0;
@@ -2550,7 +2547,7 @@
                 shadowCol = "rgba(175, 82, 222, 0.15)";
                 badgeBg = "linear-gradient(135deg, #af52de, #5856d6)";
                 glowBg = "radial-gradient(circle, rgba(175, 82, 222, 0.25) 0%, transparent 70%)";
-            } else if (info.rarity === "elite") {
+            } else if (info.rarity === "elite" || info.rarity === "rare") {
                 borderCol = "#007aff";
                 shadowCol = "rgba(0, 122, 255, 0.15)";
                 badgeBg = "linear-gradient(135deg, #007aff, #0040ff)";
